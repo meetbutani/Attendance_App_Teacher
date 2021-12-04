@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/activity_main.xml" value="0.20208333333333334" />
+        <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/drawable/ic_edit.xml" value="0.23958333333333334" />
+        <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/drawable/ic_user_photo.xml" value="0.23958333333333334" />
+        <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/activity_login.xml" value="0.536" />
+        <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/activity_register.xml" value="0.264" />
       </map>
     </option>
   </component>

@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Attendance App - Teacher</string>
+
+    <!-- activity_login -->
+    <string name="etLoginEmail">Email ID</string>
+    <string name="etLoginPassword">Password</string>
+    <string name="buttonLogin">Login</string>
+    <string name="textViewRegisterNow">Don\'t have an account? Register Now</string>
+
+    <!-- activity_main -->
+    <string name="buttonLogout">Logout</string>
+
+    <!-- activity_register -->
+    <string name="etRegisterFirstName">First Name</string>
+    <string name="etRegisterLastName">Last Name</string>
+    <string name="etRegisterEmail">Email ID</string>
+    <string name="etRegisterPassword">Password</string>
+    <string name="etRegisterConfirmPassword">Confirm Password</string>
+    <string name="buttonRegister">Register</string>
+    <string name="textViewLoginNow">Already have an Account? Login Now</string>
+    <string name="textViewForgotPassword">Forgot Password?</string>
+    <string name="textViewResendEmail">Resend verification Email</string>
+    <string name="editTextRollNo">Enter Roll No</string>
+
 </resources>
