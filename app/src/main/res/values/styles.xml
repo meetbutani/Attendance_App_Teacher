@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="toolbarTextSize" parent="@style/Base.TextAppearance.AppCompat.Title">
         <item name="android:textSize">18sp</item>
@@ -31,8 +31,9 @@
 
     <style name="RelativeLayoutProfile">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">34dp</item>
-        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:layout_marginHorizontal" tools:targetApi="o">10dp</item>
+        <item name="android:layout_marginVertical" tools:targetApi="o">0dp</item>
         <item name="android:orientation">horizontal</item>
     </style>
 

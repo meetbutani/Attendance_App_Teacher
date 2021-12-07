@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProfileActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryVariant"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:titleTextAppearance="@style/toolbarTextSize"
+        app:titleTextColor="@color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        android:overScrollMode="ifContentScrolls">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/ivProfileUserPic"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_demo"
+                app:civ_shadow="true"
+                app:civ_shadow_color="@color/black"
+                app:civ_shadow_radius="2dp" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivEditProfileUserPic"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="-46dp"
+                android:layout_marginBottom="30dp"
+                android:background="@color/white"
+                android:elevation="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_edit"
+                app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+
+            <RelativeLayout
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="10dp"
+                style="@style/RelativeLayoutProfile">
+
+                <TextView
+                    android:id="@+id/tvProfileName"
+                    style="@style/tvFixLinearProfile"
+                    android:layout_centerVertical="true"
+                    android:text="@string/tvProfileName" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/ivEditProfileFullName"
+                    android:layout_toEndOf="@id/tvProfileName">
+
+                    <TextView
+                        android:id="@+id/tvProfileDisplayName"
+                        style="@style/tvDyLinearProfile" />
+
+                </HorizontalScrollView>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivEditProfileFullName"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/white"
+                    android:elevation="8dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_edit"
+                    app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+
+            </RelativeLayout>
+
+            <RelativeLayout style="@style/RelativeLayoutProfile">
+
+                <TextView
+                    android:id="@+id/tvProfileEmail"
+                    style="@style/tvFixLinearProfile"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/tvProfileEmail" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/tvProfileEmail">
+
+                    <TextView
+                        android:id="@+id/tvProfileDisplayEmail"
+                        style="@style/tvDyLinearProfile" />
+
+                </HorizontalScrollView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btnProfileChangePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/btnProfileSignOut"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/btnProfileChangePassword"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/btnProfileSignOut"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/btnProfileSignOut"
+                    android:textAllCaps="false" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+

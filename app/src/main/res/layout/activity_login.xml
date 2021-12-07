@@ -8,7 +8,7 @@
     tools:context=".LoginActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarCourseList"
+        android:id="@+id/toolbarLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimaryVariant"
