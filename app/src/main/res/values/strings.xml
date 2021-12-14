@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Attendance App - Teacher</string>
 
+    <!-- dialog -->
+    <string name="etSingleField">Enter Text</string>
+
+
     <!-- activity_login -->
     <string name="etLoginEmail">Email ID</string>
     <string name="etLoginPassword">Password</string>
@@ -42,5 +46,16 @@
     <!-- activity_attendance_sheet -->
     <string name="tvASCourseName">Course Name:</string>
     <string name="tvASCourseId">Course ID:</string>
+
+    <!-- fragment_attendance_sheet -->
+    <string name="fabFragAS">New Attendance Sheet</string>
+
+    <!-- fragment_students -->
+    <string name="tvFragStuClass">Class:</string>
+    <string name="rbtnFragStuLecture">Lecture</string>
+    <string name="rbtnFragStuBatchA">A Batch</string>
+    <string name="rbtnFragStuBatchB">B Batch</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

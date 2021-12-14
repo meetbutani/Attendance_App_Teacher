@@ -7,15 +7,20 @@
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarLogin"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimaryVariant"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:titleTextAppearance="@style/toolbarTextSize"
-        app:titleTextColor="@color/white" />
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tbLoginActivity"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimaryVariant"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -47,6 +52,7 @@
                     android:id="@+id/etLoginEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints="emailAddress"
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -58,6 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
+                app:endIconMode="password_toggle"
                 android:layout_marginVertical="3dp"
                 android:hint="@string/etLoginPassword">
 
@@ -65,7 +72,8 @@
                     android:id="@+id/etLoginPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
+                    android:autofillHints="password"
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

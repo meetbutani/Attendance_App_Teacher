@@ -130,31 +130,6 @@
                     android:layout_below="@id/tlAttendanceSheet"/>
 
             </RelativeLayout>
-            <!--
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginHorizontal="5dp"
-                            android:orientation="vertical">
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/recViewCourseHomepage"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_above="@id/btnCourseHomepageNewSheet"
-                                android:layout_marginTop="5dp" />
-
-                            <Button
-                                android:id="@+id/btnCourseHomepageNewSheet"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentBottom="true"
-                                android:layout_margin="5dp"
-                                android:text="New Attendance Sheet"
-                                android:textAllCaps="false" />
-
-                        </RelativeLayout>
-            -->
 
         </LinearLayout>
 
