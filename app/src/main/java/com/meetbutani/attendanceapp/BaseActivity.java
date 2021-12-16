@@ -47,11 +47,11 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void setFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayMain, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frameLayMain, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
 

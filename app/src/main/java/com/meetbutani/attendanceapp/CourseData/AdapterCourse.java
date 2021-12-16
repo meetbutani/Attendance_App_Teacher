@@ -1,21 +1,17 @@
 package com.meetbutani.attendanceapp.CourseData;
 
-import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.meetbutani.attendanceapp.MainActivity;
+import com.meetbutani.attendanceapp.AttendanceSheetFragment;
 import com.meetbutani.attendanceapp.R;
-import com.meetbutani.attendanceapp.StudentsFragment;
 
 import java.util.ArrayList;
 
@@ -32,7 +28,7 @@ public class AdapterCourse extends RecyclerView.Adapter<AdapterCourse.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_courses, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_frag_courses, parent, false);
         return new ViewHolder(view);
     }
 
@@ -63,15 +59,20 @@ public class AdapterCourse extends RecyclerView.Adapter<AdapterCourse.ViewHolder
         public void onClick(View view) {
             int position = this.getAdapterPosition();
 
-            FragmentTransaction fragmentTransaction = CONTEXT.getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frameLayMain, new StudentsFragment());
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-            /*ModelCourse modelCourse = arrayListModelCourse.get(position);
-            Intent intent = new Intent(CONTEXT, CourseHomepageActivity.class);
-            intent.putExtra("modelCourse", modelCourse);
-            CONTEXT.startActivity(intent);*/
-            Toast.makeText(CONTEXT, position + "", Toast.LENGTH_SHORT).show();
+            ModelCourse modelCourse = arrayListModelCourse.get(position);
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("modelCourse", modelCourse);
+
+            AttendanceSheetFragment fragment = new AttendanceSheetFragment();
+            fragment.setArguments(bundle);
+            CONTEXT.getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frameLayMain, fragment)
+                    .addToBackStack(null)
+                    .commit();
+
+//            Toast.makeText(CONTEXT, position + "", Toast.LENGTH_SHORT).show();
         }
     }
 }

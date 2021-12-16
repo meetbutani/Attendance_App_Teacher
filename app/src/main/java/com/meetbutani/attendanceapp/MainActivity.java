@@ -14,9 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -24,7 +21,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.DocumentReference;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -166,16 +162,17 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String courseName = Objects.requireNonNull(etSingleField.getText()).toString().trim();
+                        String courseId = Timestamp.now().getSeconds() + "";
 
                         if (!courseName.isEmpty()) {
                             if (courseName.getBytes().length > 2) {
                                 Map<String, Object> addCourse = new HashMap<>();
                                 addCourse.put("courseName", courseName);
-                                addCourse.put("courseId", Timestamp.now().getSeconds() + "");
-                                firebaseFirestore.collection(COURSESPATH).add(addCourse).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                addCourse.put("courseId", courseId);
+                                firebaseFirestore.collection(COURSESPATH).document(courseId).set(addCourse).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        firebaseFirestore.collection(TEACHERPATH + "/" + getUid() + "/courses").document(documentReference.getId()).set(addCourse)
+                                    public void onSuccess(Void unused) {
+                                        firebaseFirestore.collection(TEACHERPATH + "/" + getUid() + "/courses").document(courseId).set(addCourse)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void unused) {

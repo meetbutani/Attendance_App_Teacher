@@ -18,11 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AttendanceAppTeacher">
         <activity
+            android:screenOrientation="portrait"
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat" />
+            android:theme="@style/Base.Theme.AppCompat"
+            tools:ignore="LockedOrientationActivity" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".SplashScreenActivity"
-            android:exported="true">
+            android:exported="true"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,20 +34,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AttendanceSheetActivity"
-            android:exported="false" />
-        <activity
+            android:screenOrientation="portrait"
             android:name=".ProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="LockedOrientationActivity" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="LockedOrientationActivity" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="LockedOrientationActivity" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="LockedOrientationActivity" />
     </application>
 
 </manifest>

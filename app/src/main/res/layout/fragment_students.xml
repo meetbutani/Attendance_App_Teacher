@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".AttendanceSheetFragment">
+    tools:context=".StudentsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,21 +29,21 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/rbtnFragStuLecture"
+                android:id="@+id/rBtnFragStuLecture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
                 android:text="@string/rbtnFragStuLecture" />
 
             <RadioButton
-                android:id="@+id/rbtnFragStuBatchA"
+                android:id="@+id/rBtnFragStuBatchA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
                 android:text="@string/rbtnFragStuBatchA" />
 
             <RadioButton
-                android:id="@+id/rbtnFragStuBatchB"
+                android:id="@+id/rBtnFragStuBatchB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -54,9 +55,10 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFragAS"
+        android:id="@+id/rvFragStudents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_marginTop="5dp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

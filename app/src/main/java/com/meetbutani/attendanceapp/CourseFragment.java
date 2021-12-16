@@ -25,6 +25,7 @@ public class CourseFragment extends BaseFragment {
     private View view;
     private RecyclerView rvCourse;
     private TextView tvDisCourses;
+    private ModelCourse modelCourse;
     private ArrayList<ModelCourse> arrayListModelCourse;
     private AdapterCourse adapterCourse;
 
@@ -74,7 +75,7 @@ public class CourseFragment extends BaseFragment {
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
 
                             for (DocumentSnapshot documentSnapshot : list) {
-                                ModelCourse modelCourse = documentSnapshot.toObject(ModelCourse.class);
+                                modelCourse = documentSnapshot.toObject(ModelCourse.class);
                                 arrayListModelCourse.add(modelCourse);
                             }
 
