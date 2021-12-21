@@ -66,7 +66,7 @@ public class LoginActivity extends BaseActivity {
             String emailSent = getIntent().getStringExtra("emailSent") + "";
             if (emailSent.equals("yes")) {
                 AlertDialog.Builder verifyEmailDialog = new AlertDialog.Builder(CONTEXT);
-                verifyEmailDialog.setMessage("Verification email has been sent...").create().show();
+                verifyEmailDialog.setMessage("Verification email has been sent.").create().show();
             }
         }
 

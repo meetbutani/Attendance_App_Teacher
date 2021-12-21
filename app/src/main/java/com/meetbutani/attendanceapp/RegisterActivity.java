@@ -36,6 +36,7 @@ import com.google.firebase.storage.UploadTask;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -186,7 +187,12 @@ public class RegisterActivity extends BaseActivity {
 
     // Here we will pick image from gallery or camera
     private void pickFromGallery() {
-        CropImage.activity().start(RegisterActivity.this);
+        CropImage.activity()
+                .setActivityTitle("Image Cropper")
+                .setCropShape(CropImageView.CropShape.OVAL)
+                .setAspectRatio(1, 1)
+                .setBackgroundColor(Color.parseColor("#AA000000"))
+                .start(RegisterActivity.this);
     }
 
     // Requesting camera and gallery
@@ -238,6 +244,7 @@ public class RegisterActivity extends BaseActivity {
             }
         }
     }
+
 
 /*
     @Override
@@ -294,12 +301,7 @@ public class RegisterActivity extends BaseActivity {
                                     public void onSuccess(Uri uri) {
                                         Picasso.get().load(uri).into(ivProfileUserPic);
 
-                                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                                .setDisplayName(firstName + " " + lastName)
-                                                .setPhotoUri(uri)
-                                                .build();
-
-                                        storeData(uri.toString(), profileUpdates);
+                                        updateProfile(uri.toString());
                                     }
                                 });
                             }
@@ -309,25 +311,29 @@ public class RegisterActivity extends BaseActivity {
                                 AlertDialog.Builder dialog = new AlertDialog.Builder(CONTEXT);
                                 dialog.setMessage("Error: " + e.getMessage()).create().show();
 
-                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(firstName + " " + lastName)
-                                        .build();
-                                storeData(" ", profileUpdates);
+                                updateProfile(" ");
                             }
                         });
                     } else {
-                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(firstName + " " + lastName)
-                                .build();
-                        storeData(" ", profileUpdates);
+                        updateProfile(" ");
                     }
                 }
 
-                private void storeData(String uri, UserProfileChangeRequest profileUpdates) {
+                private void updateProfile(String uri) {
+
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(firstName + " " + lastName)
+                            .setPhotoUri(Uri.parse(uri))
+                            .build();
 
                     firebaseUser.updateProfile(profileUpdates)
                             .addOnSuccessListener(unused -> {
                             });
+
+                    storeData(uri);
+                }
+
+                private void storeData(String uri) {
 
                     firebaseUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override

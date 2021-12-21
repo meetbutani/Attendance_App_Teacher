@@ -50,7 +50,6 @@ public class BaseActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frameLayMain, fragment)
-                .addToBackStack(null)
                 .commit();
     }
 

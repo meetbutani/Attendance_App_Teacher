@@ -9,15 +9,12 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.meetbutani.attendanceapp.AttendanceSheetData.AdapterAttendanceSheet;
-import com.meetbutani.attendanceapp.AttendanceSheetData.ModelAttendanceSheet;
 import com.meetbutani.attendanceapp.CourseData.ModelCourse;
 import com.meetbutani.attendanceapp.StudentListData.AdapterStudentList;
 import com.meetbutani.attendanceapp.StudentListData.ModelStudentList;
@@ -25,6 +22,7 @@ import com.meetbutani.attendanceapp.StudentListData.ModelStudentList;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressLint("NotifyDataSetChanged")
 public class StudentsFragment extends BaseFragment {
 
     private View view;
@@ -38,6 +36,9 @@ public class StudentsFragment extends BaseFragment {
 
     private RecyclerView rvFragStudents;
     private ArrayList<ModelStudentList> arrayListModelStudentList;
+    private ArrayList<ModelStudentList> arrayListModelStudentListLec;
+    private ArrayList<ModelStudentList> arrayListModelStudentListA;
+    private ArrayList<ModelStudentList> arrayListModelStudentListB;
     private AdapterStudentList adapterStudentList;
 
     @Override
@@ -63,6 +64,30 @@ public class StudentsFragment extends BaseFragment {
         
         displayStudents();
 
+        rBtnFragStuLecture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                arrayListModelStudentList = arrayListModelStudentListLec;
+                adapterStudentList.notifyDataSetChanged();
+            }
+        });
+
+        rBtnFragStuBatchA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                arrayListModelStudentList = arrayListModelStudentListA;
+                adapterStudentList.notifyDataSetChanged();
+            }
+        });
+
+        rBtnFragStuBatchB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                arrayListModelStudentList = arrayListModelStudentListB;
+                adapterStudentList.notifyDataSetChanged();
+            }
+        });
+
         return view;
     }
 
@@ -70,7 +95,7 @@ public class StudentsFragment extends BaseFragment {
         try {
             rvFragStudents.setHasFixedSize(true);
 
-            arrayListModelStudentList = new ArrayList<>();
+            arrayListModelStudentList = arrayListModelStudentListLec = arrayListModelStudentListA = arrayListModelStudentListB = new ArrayList<>();
             adapterStudentList = new AdapterStudentList(getActivity(), arrayListModelStudentList, getModelCourse());
             rvFragStudents.setAdapter(adapterStudentList);
 
@@ -83,8 +108,24 @@ public class StudentsFragment extends BaseFragment {
 
                             for (DocumentSnapshot documentSnapshot : list) {
                                 modelStudentList = documentSnapshot.toObject(ModelStudentList.class);
-                                arrayListModelStudentList.add(modelStudentList);
+
+                                arrayListModelStudentListLec.add(modelStudentList);
+
+                                if (modelStudentList.Class.equalsIgnoreCase("A"))
+                                    arrayListModelStudentListA.add(modelStudentList);
+
+                                if (modelStudentList.Class.equalsIgnoreCase("B"))
+                                    arrayListModelStudentListB.add(modelStudentList);
                             }
+
+                            if (rBtnFragStuLecture.isChecked())
+                                arrayListModelStudentList = arrayListModelStudentListLec;
+
+                            if (rBtnFragStuBatchA.isChecked())
+                                arrayListModelStudentList = arrayListModelStudentListA;
+
+                            if (rBtnFragStuBatchB.isChecked())
+                                arrayListModelStudentList = arrayListModelStudentListB;
 
                             adapterStudentList.notifyDataSetChanged();
                         }

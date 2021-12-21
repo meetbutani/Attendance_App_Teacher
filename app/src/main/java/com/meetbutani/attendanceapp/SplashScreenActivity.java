@@ -3,9 +3,8 @@ package com.meetbutani.attendanceapp;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.WindowManager;
-import android.window.SplashScreen;
-import android.window.SplashScreenView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,46 +14,25 @@ import com.google.firebase.auth.FirebaseUser;
 @SuppressLint("CustomSplashScreen")
 public class SplashScreenActivity extends AppCompatActivity {
 
-    Thread thread;
+    int SPLASH_SCREEN_TIME_OUT = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_splash_screen);
 
-        int SLEEP_TIME = 1000; // 4000
-
-        this.thread = new Thread() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                super.run();
-
-                try {
-                    sleep(SLEEP_TIME);
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                if (currentUser != null && currentUser.isEmailVerified()) {
+                    startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+                } else {
+                    startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
                 }
-                // Error
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-                // always
-                finally {
-                    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                    if (currentUser != null && currentUser.isEmailVerified()) {
-                        startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
-                    } else {
-                        startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-                        finish();
-                    }
-                }
+                finish();
             }
-        };
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        this.thread.start();
+        }, SPLASH_SCREEN_TIME_OUT);
     }
 }

@@ -36,8 +36,11 @@ public class AdapterAttendanceSheet extends RecyclerView.Adapter<AdapterAttendan
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvRecViewCourseHomepageDate.setText(arrayListModelAttendanceSheet.get(position).date);
-        holder.tvRecViewCourseHomepageTime.setText((arrayListModelAttendanceSheet.get(position).startTime + " - " + arrayListModelAttendanceSheet.get(position).endTime));
+        ModelAttendanceSheet model = arrayListModelAttendanceSheet.get(position);
+        holder.tvRVFragASDate.setText(model.date);
+        holder.tvRVFragASTime.setText((model.startTime + " - " + model.endTime));
+        holder.tvRVFragASClass.setText((model.Class));
+        holder.tvRVFragASType.setText((model.type));
     }
 
     @Override
@@ -47,14 +50,16 @@ public class AdapterAttendanceSheet extends RecyclerView.Adapter<AdapterAttendan
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView tvRecViewCourseHomepageDate, tvRecViewCourseHomepageTime;
+        TextView tvRVFragASDate, tvRVFragASTime, tvRVFragASClass, tvRVFragASType;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             itemView.setOnClickListener(this);
-            tvRecViewCourseHomepageDate = itemView.findViewById(R.id.tvRecViewCourseHomepageDate);
-            tvRecViewCourseHomepageTime = itemView.findViewById(R.id.tvRecViewCourseHomepageTime);
+            tvRVFragASDate = itemView.findViewById(R.id.tvRVFragASDate);
+            tvRVFragASTime = itemView.findViewById(R.id.tvRVFragASTime);
+            tvRVFragASClass = itemView.findViewById(R.id.tvRVFragASClass);
+            tvRVFragASType = itemView.findViewById(R.id.tvRVFragASType);
 
         }
 
