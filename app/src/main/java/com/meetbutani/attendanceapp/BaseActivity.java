@@ -46,10 +46,11 @@ public class BaseActivity extends AppCompatActivity {
         editSP.putString("uid", value).commit();
     }
 
-    protected void setFragment(Fragment fragment) {
+    protected void setFragment(Fragment fragment, String FragTitle) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.frameLayMain, fragment)
+                .replace(R.id.frameLayMain, fragment, FragTitle)
+                .addToBackStack(null)
                 .commit();
     }
 

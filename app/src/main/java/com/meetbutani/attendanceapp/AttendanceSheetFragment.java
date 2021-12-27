@@ -2,6 +2,7 @@ package com.meetbutani.attendanceapp;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.os.Bundle;
@@ -11,31 +12,48 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.tabs.TabLayout;
-import com.meetbutani.attendanceapp.CourseData.ModelCourse;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.meetbutani.attendanceapp.ModelClass.ModelCourse;
+import com.meetbutani.attendanceapp.ModelClass.ModelStudentData;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
-public class AttendanceSheetFragment extends Fragment {
+public class AttendanceSheetFragment extends BaseFragment {
 
+    protected Bundle bundleCourse;
     private View view;
-
     private TabLayout tlAttendanceSheet;
     private ViewPager vpAttendanceSheet;
     private ASViewpagerAdapter adapter;
-    private ModelCourse modelCourse;
-    private ShapeableImageView ivCopyCourseId;
-    protected Bundle bundle;
 
+    private ModelCourse modelCourse;
+    private ModelStudentData modelStudentData;
+    private ShapeableImageView ivCopyCourseId;
     private TextView tvDisASCourseName, tvDisASCourseId;
+
+    private ArrayList<ModelStudentData> aLMSDLec;
+    private ArrayList<ModelStudentData> aLMSDA;
+    private ArrayList<ModelStudentData> aLMSDB;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bundleCourse = this.getArguments();
+
+        if (bundleCourse != null) {
+            aLMSDLec = (ArrayList<ModelStudentData>) bundleCourse.getSerializable("aLMSDLec");
+            aLMSDA = (ArrayList<ModelStudentData>) bundleCourse.getSerializable("aLMSDA");
+            aLMSDB = (ArrayList<ModelStudentData>) bundleCourse.getSerializable("aLMSDB");
+            modelCourse = (ModelCourse) bundleCourse.getSerializable("modelCourse");
+        }
     }
 
     @Override
@@ -47,13 +65,11 @@ public class AttendanceSheetFragment extends Fragment {
         tvDisASCourseName = view.findViewById(R.id.tvDisASCourseName);
         tvDisASCourseId = view.findViewById(R.id.tvDisASCourseId);
         ivCopyCourseId = view.findViewById(R.id.ivCopyCourseId);
+        tlAttendanceSheet = view.findViewById(R.id.tlAttendanceSheet);
+        vpAttendanceSheet = view.findViewById(R.id.vpAttendanceSheet);
 
-        bundle = this.getArguments();
-        if (bundle != null) {
-            modelCourse = (ModelCourse) bundle.getSerializable("modelCourse");
-            tvDisASCourseName.setText(modelCourse.courseName);
-            tvDisASCourseId.setText(modelCourse.courseId);
-        }
+        tvDisASCourseName.setText(modelCourse.courseName);
+        tvDisASCourseId.setText(modelCourse.courseId);
 
         ivCopyCourseId.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,17 +83,72 @@ public class AttendanceSheetFragment extends Fragment {
             }
         });
 
-        tlAttendanceSheet = view.findViewById(R.id.tlAttendanceSheet);
-        vpAttendanceSheet = view.findViewById(R.id.vpAttendanceSheet);
-        adapter = new ASViewpagerAdapter(getParentFragmentManager());
+        setViewPager();
 
-        adapter.addFragmentInList(new AttendanceListFragment(), "Attendance Sheet");
-        adapter.addFragmentInList(new StudentsFragment(), "Students");
+        return view;
+    }
+
+    private void setViewPager() {
+
+        adapter = new ASViewpagerAdapter(getChildFragmentManager());
+
+        Bundle bundleAS = new Bundle();
+        bundleAS.putSerializable("modelCourse", modelCourse);
+        bundleAS.putSerializable("aLMSDLec", aLMSDLec);
+        bundleAS.putSerializable("aLMSDA", aLMSDA);
+        bundleAS.putSerializable("aLMSDB", aLMSDB);
+
+        AttendanceListFragment attendanceListFragment = new AttendanceListFragment();
+        attendanceListFragment.setArguments(bundleAS);
+
+        StudentsFragment studentsFragment = new StudentsFragment();
+        studentsFragment.setArguments(bundleAS);
+
+        adapter.addFragmentInList(attendanceListFragment, "Attendance Sheet");
+        adapter.addFragmentInList(studentsFragment, "Students");
 
         vpAttendanceSheet.setAdapter(adapter);
 
         tlAttendanceSheet.setupWithViewPager(vpAttendanceSheet);
 
-        return view;
     }
+
+/*
+    private void storeArrayList() {
+        try {
+            aLMSDLec = new ArrayList<>();
+            aLMSDA = new ArrayList<>();
+            aLMSDB = new ArrayList<>();
+
+            firebaseFirestore.collection(COURSESPATH + "/" + modelCourse.courseId + "/students").orderBy("rollNo", Query.Direction.ASCENDING).get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+
+                            for (DocumentSnapshot documentSnapshot : list) {
+                                modelStudentData = documentSnapshot.toObject(ModelStudentData.class);
+
+                                aLMSDLec.add(modelStudentData);
+
+                                if (modelStudentData.Class.equalsIgnoreCase("A"))
+                                    aLMSDA.add(modelStudentData);
+
+                                if (modelStudentData.Class.equalsIgnoreCase("B"))
+                                    aLMSDB.add(modelStudentData);
+                            }
+
+                            setViewPager();
+
+                        }
+                    });
+        } catch (Exception e) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(CONTEXT);
+            dialog.setMessage("Error: " + e.getMessage()).create().show();
+//            Toast.makeText(CONTEXT, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+*/
+
 }

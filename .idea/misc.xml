@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.23958333333333334" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/drawable-v24/ic_more.xml" value="0.23958333333333334" />
+        <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/drawable-v24/ic_unmark_back.xml" value="0.23958333333333334" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/drawable/ic_add.xml" value="0.23958333333333334" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/drawable/ic_add_course.xml" value="0.23958333333333334" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/drawable/ic_baseline_dashboard_customize_24.xml" value="0.23958333333333334" />
@@ -24,23 +25,27 @@
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/activity_attendance_sheet.xml" value="0.21927083333333333" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/activity_course.xml" value="0.21927083333333333" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/activity_login.xml" value="0.264" />
-        <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/activity_main.xml" value="0.33276450511945393" />
+        <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/activity_profile.xml" value="0.21927083333333333" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/activity_splash_screen.xml" value="0.21927083333333333" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/dialog_new_attendance_sheet.xml" value="0.3904109589041096" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/dialog_single_field.xml" value="0.21927083333333333" />
+        <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/dialog_student_profile.xml" value="0.3171355498721228" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/fragment_attendance_list.xml" value="0.21927083333333333" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/fragment_attendance_sheet.xml" value="0.2" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/fragment_course.xml" value="0.21927083333333333" />
+        <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/fragment_manual_attendance.xml" value="0.2572421784472769" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/fragment_students.xml" value="0.264" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/layout_attendance_sheet.xml" value="0.264" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/layout_courses.xml" value="0.264" />
-        <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/layout_frag_attendance_sheet.xml" value="0.4351145038167939" />
+        <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/layout_frag_attendance_sheet.xml" value="0.35980551053484605" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/layout_frag_courses.xml" value="0.2" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/layout_frag_students.xml" value="0.264" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/layout_nav_header.xml" value="0.21927083333333333" />
+        <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/layout_student_attendance.xml" value="0.3854660347551343" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/nav_header.xml" value="0.42214532871972316" />
+        <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/layout/recyclerview_sheet_homepage.xml" value="0.2" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/menu/menu_courses.xml" value="0.21927083333333333" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/menu/menu_main.xml" value="0.21927083333333333" />
         <entry key="..\:/Project_Sem_6/Attendance_App_Teacher/app/src/main/res/menu/menu_navigation.xml" value="0.264" />

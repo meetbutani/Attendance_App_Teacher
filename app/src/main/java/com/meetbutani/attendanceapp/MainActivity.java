@@ -14,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -32,6 +34,9 @@ public class MainActivity extends BaseActivity {
     private MaterialToolbar tbMainActivity;
     private NavigationView navViewMain;
 
+    private long backPressedTime;
+    private Toast toast;
+
     @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +51,7 @@ public class MainActivity extends BaseActivity {
 
         CONTEXT = MainActivity.this;
 
-        setFragment(new CourseFragment());
+        setFragment(new CourseFragment(), "CourseFragment");
 
         tbMainActivity.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,16 +69,17 @@ public class MainActivity extends BaseActivity {
                 drawerLayout.closeDrawer(GravityCompat.START);
                 switch (id) {
                     case R.id.itCourse:
-                        setFragment(new CourseFragment());
+                        FragmentManager fm = getSupportFragmentManager();
+                        for (int i = 0; i < fm.getBackStackEntryCount(); i++)
+                            fm.popBackStack();
+                        setFragment(new CourseFragment(), "CourseFragment");
                         break;
 
                     case R.id.nav_home2:
-                        setFragment(new AttendanceSheetFragment());
                         Toast.makeText(CONTEXT, "Home 2", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.nav_home3:
-                        setFragment(new StudentsFragment());
                         Toast.makeText(CONTEXT, "Home 3", Toast.LENGTH_SHORT).show();
                         break;
 
@@ -177,7 +183,7 @@ public class MainActivity extends BaseActivity {
                                                     @Override
                                                     public void onSuccess(Void unused) {
                                                         Toast.makeText(CONTEXT, "Course Added Successfully", Toast.LENGTH_SHORT).show();
-                                                        setFragment(new CourseFragment());
+                                                        setFragment(new CourseFragment(), "CourseFragment");
                                                     }
                                                 });
                                     }
@@ -194,5 +200,41 @@ public class MainActivity extends BaseActivity {
                 });
 
         builder.create().show();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag("CourseFragment");
+
+        if (fragment instanceof CourseFragment && fragment.isVisible()) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+            dialog.setMessage("Are you sure you want to exit form Attendance App - Teacher");
+            dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    MainActivity.super.onBackPressed();
+                    MainActivity.super.onBackPressed();
+                }
+            });
+            dialog.setNegativeButton("No", (dialog1, which) -> {
+            });
+            dialog.create().show();
+        } else super.onBackPressed();
+
+
+/*
+        if (fragment instanceof CourseFragment && fragment.isVisible()) {
+            if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                toast.cancel();
+                super.onBackPressed();
+                super.onBackPressed();
+            } else {
+                toast = Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            backPressedTime = System.currentTimeMillis();
+        } else super.onBackPressed();
+*/
     }
 }

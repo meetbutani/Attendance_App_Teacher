@@ -12,28 +12,27 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.meetbutani.attendanceapp.AttendanceSheetData.AdapterAttendanceSheet;
-import com.meetbutani.attendanceapp.AttendanceSheetData.ModelAttendanceSheet;
-import com.meetbutani.attendanceapp.CourseData.ModelCourse;
+import com.meetbutani.attendanceapp.AdapterClass.AdapterAttendanceSheet;
+import com.meetbutani.attendanceapp.ModelClass.ModelAttendanceSheet;
+import com.meetbutani.attendanceapp.ModelClass.ModelCourse;
+import com.meetbutani.attendanceapp.ModelClass.ModelStudentData;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,11 +42,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AttendanceListFragment extends BaseFragment {
+public class AttendanceListFragment extends AttendanceSheetFragment {
 
     private View view;
     private Context CONTEXT;
-    private Bundle bundle;
+    private Bundle bundleAS;
     private ModelCourse modelCourse;
     private ModelAttendanceSheet modelAttendanceSheet;
     private String COURSEID;
@@ -75,7 +74,14 @@ public class AttendanceListFragment extends BaseFragment {
         rvFragAS = view.findViewById(R.id.rvFragAS);
         fabFragAS = view.findViewById(R.id.fabFragAS);
 
-        modelCourse = getModelCourse();
+        bundleAS = this.getArguments();
+
+        if (bundleAS != null) {
+            modelCourse = (ModelCourse) bundleAS.getSerializable("modelCourse");
+            COURSEID = modelCourse.courseId;
+        }
+
+        displayAttendanceSheet();
 
         fabFragAS.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,8 +89,6 @@ public class AttendanceListFragment extends BaseFragment {
                 createAttendanceSheet();
             }
         });
-
-        displayAttendanceSheet();
 
         return view;
     }
@@ -257,27 +261,14 @@ public class AttendanceListFragment extends BaseFragment {
 
     }
 
-    private ModelCourse getModelCourse() {
-        AttendanceSheetFragment fragment = new AttendanceSheetFragment();
-        bundle = fragment.bundle;
-
-        if (bundle != null) {
-            modelCourse = (ModelCourse) bundle.getSerializable("modelCourse");
-            COURSEID = modelCourse.courseId;
-        }
-
-        return modelCourse;
-    }
-
     private void displayAttendanceSheet() {
         try {
             rvFragAS.setHasFixedSize(true);
 
             arrayListModelAttendanceSheet = new ArrayList<>();
-            adapterAttendanceSheet = new AdapterAttendanceSheet(getActivity(), arrayListModelAttendanceSheet, getModelCourse());
+            adapterAttendanceSheet = new AdapterAttendanceSheet(getActivity(), arrayListModelAttendanceSheet, bundleAS);
             rvFragAS.setAdapter(adapterAttendanceSheet);
 
-            getModelCourse();
             firebaseFirestore.collection(COURSESPATH + "/" + COURSEID + "/sheets").orderBy("timestamp", Query.Direction.DESCENDING).get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @SuppressLint("NotifyDataSetChanged")
@@ -294,7 +285,9 @@ public class AttendanceListFragment extends BaseFragment {
                         }
                     });
         } catch (Exception e) {
-            Toast.makeText(CONTEXT, "No Data", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder dialog = new AlertDialog.Builder(CONTEXT);
+            dialog.setMessage("Error: attendance sheet" + e.getMessage()).create().show();
+//            Toast.makeText(CONTEXT, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 }

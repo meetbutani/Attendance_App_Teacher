@@ -5,23 +5,24 @@ import static android.content.Context.MODE_APPEND;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.meetbutani.attendanceapp.ModelClass.ModelStudentData;
+
+import java.util.ArrayList;
 
 public class BaseFragment extends Fragment {
 
-    protected Context CONTEXT = getContext();
     protected final String TEACHERPATH = "/app/app/teachers";
     protected final String COURSESPATH = "/app/app/courses";
-
+    protected Context CONTEXT = getContext();
     protected FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     protected FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     protected FirebaseUser firebaseUser;

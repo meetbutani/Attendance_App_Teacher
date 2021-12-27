@@ -14,8 +14,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.meetbutani.attendanceapp.CourseData.AdapterCourse;
-import com.meetbutani.attendanceapp.CourseData.ModelCourse;
+import com.meetbutani.attendanceapp.AdapterClass.AdapterCourse;
+import com.meetbutani.attendanceapp.ModelClass.ModelCourse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +32,6 @@ public class CourseFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
