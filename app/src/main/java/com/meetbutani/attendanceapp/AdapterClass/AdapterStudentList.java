@@ -30,8 +30,8 @@ public class AdapterStudentList extends RecyclerView.Adapter<AdapterStudentList.
     private final FragmentActivity CONTEXT;
     private final ArrayList<ModelStudentData> arrayListModelStudentData;
     private final ModelCourse modelCourse;
-    private ModelStudentData modelStudentData;
     public ViewHolder holder;
+    private ModelStudentData modelStudentData;
 
     public AdapterStudentList(FragmentActivity CONTEXT, ArrayList<ModelStudentData> arrayListModelStudentData, ModelCourse modelCourse) {
         this.CONTEXT = CONTEXT;
@@ -39,7 +39,7 @@ public class AdapterStudentList extends RecyclerView.Adapter<AdapterStudentList.
         this.modelCourse = modelCourse;
     }
 
-@NonNull
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_frag_students, parent, false);
@@ -70,35 +70,6 @@ public class AdapterStudentList extends RecyclerView.Adapter<AdapterStudentList.
     @Override
     public int getItemCount() {
         return arrayListModelStudentData.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        private final CircularImageView ivStudentProfilePic;
-        private final TextView tvRecViewSheetHomepageName, tvRecViewSheetHomepageRollNo;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            ivStudentProfilePic = itemView.findViewById(R.id.ivStudentProfilePic);
-            tvRecViewSheetHomepageName = itemView.findViewById(R.id.tvRVSAName);
-            tvRecViewSheetHomepageRollNo = itemView.findViewById(R.id.tvRVSARollNo);
-
-            ivStudentProfilePic.setOnClickListener(this);
-        }
-
-        @SuppressLint("NonConstantResourceId")
-        @Override
-        public void onClick(View view) {
-            int position = this.getAdapterPosition();
-            holder = ViewHolder.this;
-//            Toast.makeText(CONTEXT, position + "", Toast.LENGTH_SHORT).show();
-
-            if (view.getId() == R.id.ivStudentProfilePic) {
-                displayStudentProfile(position);
-            }
-
-        }
     }
 
     private void displayStudentProfile(int position) {
@@ -139,5 +110,34 @@ public class AdapterStudentList extends RecyclerView.Adapter<AdapterStudentList.
 
         builder.setView(studentProfileDialog);
         builder.create().show();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private final CircularImageView ivStudentProfilePic;
+        private final TextView tvRecViewSheetHomepageName, tvRecViewSheetHomepageRollNo;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            ivStudentProfilePic = itemView.findViewById(R.id.ivStudentProfilePic);
+            tvRecViewSheetHomepageName = itemView.findViewById(R.id.tvRVSAName);
+            tvRecViewSheetHomepageRollNo = itemView.findViewById(R.id.tvRVSARollNo);
+
+            ivStudentProfilePic.setOnClickListener(this);
+        }
+
+        @SuppressLint("NonConstantResourceId")
+        @Override
+        public void onClick(View view) {
+            int position = this.getAdapterPosition();
+            holder = ViewHolder.this;
+//            Toast.makeText(CONTEXT, position + "", Toast.LENGTH_SHORT).show();
+
+            if (view.getId() == R.id.ivStudentProfilePic) {
+                displayStudentProfile(position);
+            }
+
+        }
     }
 }

@@ -196,26 +196,26 @@ public class LoginActivity extends BaseActivity {
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.cancel();
                     try {
-                    String errorCode = ((FirebaseAuthException) e).getErrorCode();
-                    switch (errorCode) {
-                        case "ERROR_USER_NOT_FOUND":
-                            etErLoginEmail.setErrorEnabled(true);
-                            etErLoginEmail.setError("Email ID not Registered");
-                            break;
-                        case "ERROR_INVALID_EMAIL":
-                            etErLoginEmail.setErrorEnabled(true);
-                            etErLoginEmail.setError("Invalid Email ID");
-                            break;
-                        case "ERROR_WRONG_PASSWORD":
-                            etErLoginPassword.setErrorEnabled(true);
-                            etErLoginPassword.setError("Invalid Email ID");
-                            etLoginPassword.setError("Invalid Password");
-                            break;
-                        default:
-                            Toast.makeText(CONTEXT, e.getMessage(), Toast.LENGTH_LONG).show();
-                            break;
-                    }
-                    } catch (Exception error){
+                        String errorCode = ((FirebaseAuthException) e).getErrorCode();
+                        switch (errorCode) {
+                            case "ERROR_USER_NOT_FOUND":
+                                etErLoginEmail.setErrorEnabled(true);
+                                etErLoginEmail.setError("Email ID not Registered");
+                                break;
+                            case "ERROR_INVALID_EMAIL":
+                                etErLoginEmail.setErrorEnabled(true);
+                                etErLoginEmail.setError("Invalid Email ID");
+                                break;
+                            case "ERROR_WRONG_PASSWORD":
+                                etErLoginPassword.setErrorEnabled(true);
+                                etErLoginPassword.setError("Invalid Email ID");
+                                etLoginPassword.setError("Invalid Password");
+                                break;
+                            default:
+                                Toast.makeText(CONTEXT, e.getMessage(), Toast.LENGTH_LONG).show();
+                                break;
+                        }
+                    } catch (Exception error) {
                         AlertDialog.Builder dialog = new AlertDialog.Builder(CONTEXT);
                         dialog.setMessage("Error: " + error.getMessage()).create().show();
                     }

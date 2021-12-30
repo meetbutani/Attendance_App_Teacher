@@ -11,8 +11,6 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,11 +18,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+@SuppressLint("WrongConstant")
 public class BaseActivity extends AppCompatActivity {
 
     protected final String TEACHERPATH = "/app/app/teachers";
     protected final String COURSESPATH = "/app/app/courses";
-    protected Context CONTEXT;
+    protected Context CONTEXT = BaseActivity.this;
 
     protected FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     protected FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
@@ -34,7 +33,6 @@ public class BaseActivity extends AppCompatActivity {
     protected SharedPreferences readSP;
     protected SharedPreferences.Editor editSP;
 
-    @SuppressLint("WrongConstant")
     protected String getUid() {
         readSP = CONTEXT.getSharedPreferences("userData", MODE_APPEND);
         return readSP.getString("uid", "null");

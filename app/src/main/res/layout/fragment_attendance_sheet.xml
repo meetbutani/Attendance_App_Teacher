@@ -108,10 +108,10 @@
                     android:id="@+id/tlAttendanceSheet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:tabTextAppearance="@style/tabLayoutText"
                     app:tabBackground="@android:color/transparent"
                     app:tabIndicatorColor="?attr/colorPrimaryVariant"
                     app:tabSelectedTextColor="?attr/colorPrimaryVariant"
+                    app:tabTextAppearance="@style/tabLayoutText"
                     app:tabTextColor="@color/black" />
 
                 <androidx.viewpager.widget.ViewPager

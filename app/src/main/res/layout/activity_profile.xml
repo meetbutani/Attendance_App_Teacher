@@ -57,9 +57,9 @@
                 app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
             <RelativeLayout
-                android:layout_marginEnd="0dp"
+                style="@style/RelativeLayoutProfile"
                 android:layout_marginStart="10dp"
-                style="@style/RelativeLayoutProfile">
+                android:layout_marginEnd="0dp">
 
                 <TextView
                     android:id="@+id/tvProfileName"

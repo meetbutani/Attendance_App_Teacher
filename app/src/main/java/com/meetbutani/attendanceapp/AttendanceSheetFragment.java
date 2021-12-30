@@ -2,7 +2,6 @@ package com.meetbutani.attendanceapp;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 
-import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.os.Bundle;
@@ -14,17 +13,12 @@ import android.widget.Toast;
 
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.meetbutani.attendanceapp.ModelClass.ModelCourse;
 import com.meetbutani.attendanceapp.ModelClass.ModelStudentData;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AttendanceSheetFragment extends BaseFragment {
 

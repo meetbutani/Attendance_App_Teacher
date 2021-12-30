@@ -11,13 +11,10 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.meetbutani.attendanceapp.ModelClass.ModelStudentData;
 
-import java.util.ArrayList;
-
+@SuppressLint("WrongConstant")
 public class BaseFragment extends Fragment {
 
     protected final String TEACHERPATH = "/app/app/teachers";
@@ -31,7 +28,6 @@ public class BaseFragment extends Fragment {
     protected SharedPreferences readSP;
     protected SharedPreferences.Editor editSP;
 
-    @SuppressLint("WrongConstant")
     protected String getUid() {
         readSP = CONTEXT.getSharedPreferences("userData", MODE_APPEND);
         return readSP.getString("uid", "null");

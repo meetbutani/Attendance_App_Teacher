@@ -30,9 +30,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.meetbutani.attendanceapp.AdapterClass.AdapterAttendanceSheet;
 import com.meetbutani.attendanceapp.ModelClass.ModelAttendanceSheet;
 import com.meetbutani.attendanceapp.ModelClass.ModelCourse;
-import com.meetbutani.attendanceapp.ModelClass.ModelStudentData;
 
-import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
