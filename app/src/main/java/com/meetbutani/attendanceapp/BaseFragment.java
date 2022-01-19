@@ -33,4 +33,14 @@ public class BaseFragment extends Fragment {
         return readSP.getString("uid", "null");
     }
 
+    protected void setFragment(Fragment fragment, String FragTitle) {
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frameLayMain, fragment, FragTitle)
+                .addToBackStack(null)
+                .commit();
+    }
+
+
 }

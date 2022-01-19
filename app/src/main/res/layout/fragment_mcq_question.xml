@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".McqQuestionFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/outline_box"
+        android:orientation="vertical"
+        android:padding="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="3dp"
+            android:hint="Question">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine|textCapSentences"
+                android:maxLines="4"
+                android:minLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!--
+                <EditText
+                    android:id="@+id/etQuestion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="2dp"
+                    android:background="@drawable/outline_box"
+                    android:hint="Question"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:maxLines="4"
+                    android:minHeight="44dp"
+                    android:minLines="1"
+                    android:padding="5dp"
+                    android:textColorHint="@color/light_black" />
+        -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:checkedButton="@id/rBtnOptA"
+                android:weightSum="4">
+
+                <RadioButton
+                    android:id="@+id/rBtnOptA"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <RadioButton
+                    android:id="@+id/rBtnOptB"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <RadioButton
+                    android:id="@+id/rBtnOptC"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <RadioButton
+                    android:id="@+id/rBtnOptD"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="3dp"
+                    android:hint="Option A">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etOptA"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapSentences"
+                        android:maxLines="4"
+                        android:minLines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="3dp"
+                    android:hint="Option B">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etOptB"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapSentences"
+                        android:maxLines="4"
+                        android:minLines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="3dp"
+                    android:hint="Option C">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etOptC"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapSentences"
+                        android:maxLines="4"
+                        android:minLines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="3dp"
+                    android:hint="Option D">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etOptD"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapSentences"
+                        android:maxLines="4"
+                        android:minLines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <!--
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:weightSum="4">
+
+                            <EditText
+                                android:id="@+id/etOptA"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginVertical="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/outline_box"
+                                android:hint="Option A"
+                                android:importantForAutofill="no"
+                                android:inputType="textCapSentences"
+                                android:paddingHorizontal="15dp"
+                                android:paddingVertical="5dp"
+                                android:textColorHint="@color/light_black" />
+
+                            <EditText
+                                android:id="@+id/etOptB"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginVertical="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/outline_box"
+                                android:hint="Option B"
+                                android:importantForAutofill="no"
+                                android:inputType="textCapSentences"
+                                android:paddingHorizontal="15dp"
+                                android:paddingVertical="5dp"
+                                android:textColorHint="@color/light_black" />
+
+                            <EditText
+                                android:id="@+id/etOptC"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginVertical="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/outline_box"
+                                android:hint="Option C"
+                                android:importantForAutofill="no"
+                                android:inputType="textCapSentences"
+                                android:paddingHorizontal="15dp"
+                                android:paddingVertical="5dp"
+                                android:textColorHint="@color/light_black" />
+
+                            <EditText
+                                android:id="@+id/etOptD"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginVertical="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/outline_box"
+                                android:hint="Option D"
+                                android:importantForAutofill="no"
+                                android:inputType="textCapSentences"
+                                android:paddingHorizontal="15dp"
+                                android:paddingVertical="5dp"
+                                android:textColorHint="@color/light_black" />
+
+
+                        </LinearLayout>
+            -->
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,37 +20,39 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.meetbutani.attendanceapp.ManualAttendanceFragment;
 import com.meetbutani.attendanceapp.ModelClass.ModelAttendanceSheet;
 import com.meetbutani.attendanceapp.ModelClass.ModelCourse;
 import com.meetbutani.attendanceapp.ModelClass.ModelStudentData;
+import com.meetbutani.attendanceapp.QuizStudentAttendanceFragment;
 import com.meetbutani.attendanceapp.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
-public class AdapterStudentAttendance extends RecyclerView.Adapter<AdapterStudentAttendance.ViewHolder> {
+public class AdapterQuizAttendance extends RecyclerView.Adapter<AdapterQuizAttendance.ViewHolder> {
 
     private final ArrayList<ModelStudentData> arrayListModelStudentData;
     private final ModelCourse modelCourse;
     private final ModelAttendanceSheet modelAttendanceSheet;
     private final HashMap<String, String> attendanceList;
     private final String COURSEPATH = "/app/app/courses";
+    private final QuizStudentAttendanceFragment quizStudentAttendanceFragment;
     public ViewHolder holder;
     private ModelStudentData modelStudentAttendance;
     private FragmentActivity CONTEXT;
     private Context context;
-    private ManualAttendanceFragment manualAttendanceFragment;
+    private String[] data;
 
-    public AdapterStudentAttendance(FragmentActivity CONTEXT, ArrayList<ModelStudentData> arrayListModelStudentData, ModelCourse modelCourse, ModelAttendanceSheet modelAttendanceSheet, HashMap<String, String> attendanceList, ManualAttendanceFragment manualAttendanceFragment) {
+    public AdapterQuizAttendance(FragmentActivity CONTEXT, ArrayList<ModelStudentData> arrayListModelStudentData, ModelCourse modelCourse, ModelAttendanceSheet modelAttendanceSheet, HashMap<String, String> attendanceList, QuizStudentAttendanceFragment quizStudentAttendanceFragment) {
         this.CONTEXT = CONTEXT;
         this.arrayListModelStudentData = arrayListModelStudentData;
         this.modelCourse = modelCourse;
         this.modelAttendanceSheet = modelAttendanceSheet;
         this.attendanceList = attendanceList;
-        this.manualAttendanceFragment = manualAttendanceFragment;
+        this.quizStudentAttendanceFragment = quizStudentAttendanceFragment;
     }
 
     @NonNull
@@ -70,23 +72,37 @@ public class AdapterStudentAttendance extends RecyclerView.Adapter<AdapterStuden
                 Picasso.get().load(Uri.parse(imageURL)).into(holder.ivStudentProfilePic);
         } catch (Exception ignored) {
         }
+
         String firstName = modelStudentAttendance.firstName;
         String lastName = modelStudentAttendance.lastName;
         String rollNo = modelStudentAttendance.rollNo;
 
         holder.tvRVSAName.setText((firstName + " " + lastName));
         holder.tvRVSARollNo.setText(rollNo);
+        holder.tvQuizScore.setVisibility(View.VISIBLE);
 
         this.holder = holder;
 
         String attendance = attendanceList.get(rollNo);
 
         if (attendance != null && !attendance.isEmpty()) {
+            data = attendance.split("~");
 //            if (attendance.equalsIgnoreCase("unMark")) selectUnMark();
-            if (attendance.equalsIgnoreCase("present")) selectPresent();
-            else if (attendance.equalsIgnoreCase("absent")) selectAbsent();
+            if (data[0].equalsIgnoreCase("present")) {
+                selectPresent();
+                holder.tvQuizScore.setText(data[1]);
+            } else if (data[0].equalsIgnoreCase("absent")) {
+                selectAbsent();
+                holder.tvQuizScore.setText(data[1]);
+            } else {
+                holder.tvQuizScore.setText(data[1]);
+            }
 //            else selectUnMark();
+
+            if (data[1].equalsIgnoreCase(Character.toString((char) '\u2298')))
+                holder.tvQuizScore.setTextSize(26);
         }
+
     }
 
 /*
@@ -112,29 +128,30 @@ public class AdapterStudentAttendance extends RecyclerView.Adapter<AdapterStuden
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void setAbsent(int position) {
         String rollNo = arrayListModelStudentData.get(position).rollNo;
+        data = Objects.requireNonNull(attendanceList.get(rollNo)).split("~");
         FirebaseFirestore.getInstance().collection(COURSEPATH + "/" + modelCourse.courseId + "/sheets/" + modelAttendanceSheet.sheetId + "/attendance")
-                .document("attendance").update(rollNo, "absent");
+                .document("attendance").update(rollNo, "absent" + "~" + data[1] + "~" + data[2]);
 
-        manualAttendanceFragment.attendanceList.replace(rollNo, "absent");
+        quizStudentAttendanceFragment.attendanceList.replace(rollNo, "absent" + "~" + data[1] + "~" + data[2]);
         updateAdapter();
     }
 
     private void updateAdapter() {
-        if (manualAttendanceFragment.rBtnFragManAttPresent.isChecked())
-            manualAttendanceFragment.displayPresent();
-        else if (manualAttendanceFragment.rBtnFragManAttAbsent.isChecked())
-            manualAttendanceFragment.displayAbsent();
-        else if (manualAttendanceFragment.rBtnFragManAttAll.isChecked())
-            manualAttendanceFragment.displayAll();
+        if (quizStudentAttendanceFragment.rBtnFragQuizAttPresent.isChecked())
+            quizStudentAttendanceFragment.displayPresent();
+        else if (quizStudentAttendanceFragment.rBtnFragQuizAttAbsent.isChecked())
+            quizStudentAttendanceFragment.displayAbsent();
+        else if (quizStudentAttendanceFragment.rBtnFragQuizAttAll.isChecked())
+            quizStudentAttendanceFragment.displayAll();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void setPresent(int position) {
         String rollNo = arrayListModelStudentData.get(position).rollNo;
         FirebaseFirestore.getInstance().collection(COURSEPATH + "/" + modelCourse.courseId + "/sheets/" + modelAttendanceSheet.sheetId + "/attendance")
-                .document("attendance").update(rollNo, "present");
+                .document("attendance").update(rollNo, "present" + "~" + data[1] + "~" + data[2]);
 
-        manualAttendanceFragment.attendanceList.replace(rollNo, "present");
+        quizStudentAttendanceFragment.attendanceList.replace(rollNo, "present" + "~" + data[1] + "~" + data[2]);
         updateAdapter();
     }
 
@@ -195,7 +212,7 @@ public class AdapterStudentAttendance extends RecyclerView.Adapter<AdapterStuden
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final CircularImageView ivStudentProfilePic;
-        private final TextView tvRVSAName, tvRVSARollNo;
+        private final TextView tvRVSAName, tvRVSARollNo, tvQuizScore;
         public ShapeableImageView ivUnMark, ivAbsent, ivPresent;
 
         public ViewHolder(@NonNull View itemView) {
@@ -203,6 +220,7 @@ public class AdapterStudentAttendance extends RecyclerView.Adapter<AdapterStuden
             ivStudentProfilePic = itemView.findViewById(R.id.ivStudentProfilePic);
             tvRVSAName = itemView.findViewById(R.id.tvRVSAName);
             tvRVSARollNo = itemView.findViewById(R.id.tvRVSARollNo);
+            tvQuizScore = itemView.findViewById(R.id.tvQuizScore);
 //            ivUnMark = itemView.findViewById(R.id.ivUnMark);
             ivAbsent = itemView.findViewById(R.id.ivAbsent);
             ivPresent = itemView.findViewById(R.id.ivPresent);

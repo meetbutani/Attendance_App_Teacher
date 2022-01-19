@@ -94,22 +94,16 @@
             android:layout_marginBottom="2dp"
             android:orientation="horizontal">
 
-            <!--
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/ivUnMark"
-                            android:layout_width="42dp"
-                            android:layout_height="42dp"
-                            android:layout_margin="2dp"
-                            android:background="?selectableItemBackground"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:padding="0.1dp"
-                            android:src="@drawable/ic_unmark_back"
-                            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-                            app:strokeColor="@color/black"
-                            app:strokeWidth="1dp"
-                            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-            -->
+            <TextView
+                android:id="@+id/tvQuizScore"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_margin="2dp"
+                android:hint="10"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:gravity="center"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/ivAbsent"

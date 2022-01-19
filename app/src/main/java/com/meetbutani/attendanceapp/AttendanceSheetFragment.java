@@ -17,6 +17,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.tabs.TabLayout;
 import com.meetbutani.attendanceapp.ModelClass.ModelCourse;
 import com.meetbutani.attendanceapp.ModelClass.ModelStudentData;
+import com.meetbutani.attendanceapp.ViewPagerAdapter.AttendanceSheetVPAdapter;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class AttendanceSheetFragment extends BaseFragment {
     private View view;
     private TabLayout tlAttendanceSheet;
     private ViewPager vpAttendanceSheet;
-    private ASViewpagerAdapter adapter;
+    private AttendanceSheetVPAdapter adapter;
 
     private ModelCourse modelCourse;
     private ModelStudentData modelStudentData;
@@ -84,7 +85,7 @@ public class AttendanceSheetFragment extends BaseFragment {
 
     private void setViewPager() {
 
-        adapter = new ASViewpagerAdapter(getChildFragmentManager());
+        adapter = new AttendanceSheetVPAdapter(getChildFragmentManager());
 
         Bundle bundleAS = new Bundle();
         bundleAS.putSerializable("modelCourse", modelCourse);

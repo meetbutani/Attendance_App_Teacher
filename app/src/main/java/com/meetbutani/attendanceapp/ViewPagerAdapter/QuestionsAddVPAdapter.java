@@ -1,4 +1,4 @@
-package com.meetbutani.attendanceapp;
+package com.meetbutani.attendanceapp.ViewPagerAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,12 +9,12 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ASViewpagerAdapter extends FragmentPagerAdapter {
+public class QuestionsAddVPAdapter extends FragmentPagerAdapter {
 
     List<Fragment> fragmentList = new ArrayList<>();
     List<String> titleList = new ArrayList<>();
 
-    public ASViewpagerAdapter(@NonNull FragmentManager fm) {
+    public QuestionsAddVPAdapter(@NonNull FragmentManager fm) {
         super(fm);
     }
 
@@ -22,7 +22,6 @@ public class ASViewpagerAdapter extends FragmentPagerAdapter {
         fragmentList.add(fragment);
         titleList.add(title);
     }
-
 
     @NonNull
     @Override
@@ -40,5 +39,4 @@ public class ASViewpagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return fragmentList.size();
     }
-
 }

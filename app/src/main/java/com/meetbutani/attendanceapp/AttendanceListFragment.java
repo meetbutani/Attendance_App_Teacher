@@ -238,14 +238,23 @@ public class AttendanceListFragment extends AttendanceSheetFragment {
                         String sheetId = Timestamp.now().getSeconds() + "";
                         addSheet.put("sheetId", sheetId);
 
+                        String finalType = type;
                         firebaseFirestore.collection(COURSESPATH + "/" + COURSEID + "/sheets").document(sheetId).set(addSheet).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
+
                                 Map<String, Object> attendance = new HashMap<>();
                                 attendance.put("date", date);
-                                FirebaseFirestore.getInstance().collection(COURSESPATH + "/" + COURSEID + "/sheets/" + sheetId + "/attendance")
+                                firebaseFirestore.collection(COURSESPATH + "/" + COURSEID + "/sheets/" + sheetId + "/attendance")
                                         .document("attendance").set(attendance);
                                 displayAttendanceSheet();
+
+                                if (finalType.equalsIgnoreCase("Quiz")) {
+                                    Map<String, Object> quiz = new HashMap<>();
+                                    quiz.put("default", "none");
+                                    firebaseFirestore.collection(COURSESPATH + "/" + COURSEID + "/sheets/" + sheetId + "/attendance")
+                                            .document("quiz").set(quiz);
+                                }
                             }
                         });
 
@@ -284,7 +293,7 @@ public class AttendanceListFragment extends AttendanceSheetFragment {
                     });
         } catch (Exception e) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(CONTEXT);
-            dialog.setMessage("Error: attendance sheet" + e.getMessage()).create().show();
+            dialog.setMessage("Error: attendance sheet " + e.getMessage()).create().show();
 //            Toast.makeText(CONTEXT, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
