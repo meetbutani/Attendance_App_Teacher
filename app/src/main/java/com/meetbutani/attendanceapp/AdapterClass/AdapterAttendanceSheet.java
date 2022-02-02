@@ -108,9 +108,7 @@ public class AdapterAttendanceSheet extends RecyclerView.Adapter<AdapterAttendan
                         .addToBackStack(null)
                         .commit();
 
-            }
-/*
-            else if (modelAttendanceSheet.type.equalsIgnoreCase("Quiz")) {
+            } else if (modelAttendanceSheet.type.equalsIgnoreCase("Quiz")) {
 
                 QuizAttendanceFragment fragment = new QuizAttendanceFragment();
                 fragment.setArguments(bundleAS);
@@ -121,7 +119,6 @@ public class AdapterAttendanceSheet extends RecyclerView.Adapter<AdapterAttendan
                         .commit();
 
             }
-*/
         }
     }
 }

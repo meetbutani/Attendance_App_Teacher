@@ -2,14 +2,11 @@ package com.meetbutani.attendanceapp;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.Timestamp;
@@ -19,7 +16,7 @@ import com.meetbutani.attendanceapp.ModelClass.ModelCourse;
 public class MultipleChoiceFragment extends QuestionsAddFragment {
 
     private View view;
-    private Bundle bundleAS;
+    private Bundle bundleQue;
     private ModelAttendanceSheet modelAttendanceSheet;
     private ModelCourse modelCourse;
     private TextInputEditText etQuestion;
@@ -28,6 +25,7 @@ public class MultipleChoiceFragment extends QuestionsAddFragment {
     private Button btnSubmit;
     private String COURSEID;
     private String sheetId;
+    private QuizQuestionFragment quizQuestionFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,11 +39,12 @@ public class MultipleChoiceFragment extends QuestionsAddFragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_multiple_choice, container, false);
 
-        bundleAS = this.getArguments();
+        bundleQue = this.getArguments();
 
-        if (bundleAS != null) {
-            modelAttendanceSheet = (ModelAttendanceSheet) bundleAS.getSerializable("modelAttendanceSheet");
-            modelCourse = (ModelCourse) bundleAS.getSerializable("modelCourse");
+        if (bundleQue != null) {
+            modelAttendanceSheet = (ModelAttendanceSheet) bundleQue.getSerializable("modelAttendanceSheet");
+            modelCourse = (ModelCourse) bundleQue.getSerializable("modelCourse");
+            quizQuestionFragment = (QuizQuestionFragment) bundleQue.getSerializable("THIS");
             COURSEID = modelCourse.courseId;
             sheetId = modelAttendanceSheet.sheetId;
         }
@@ -76,12 +75,16 @@ public class MultipleChoiceFragment extends QuestionsAddFragment {
                 if (cbOptC.isChecked()) ans = ans + "C#";
                 if (cbOptD.isChecked()) ans = ans + "D#";
 
-
                 String store = "mul" + "~" + question + "~" + optA + "~" + optB + "~" + optC + "~" + optD + "~" + ans;
                 String key = Timestamp.now().getSeconds() + "";
 
                 firebaseFirestore.collection(COURSESPATH + "/" + COURSEID + "/sheets/" + sheetId + "/attendance")
                         .document("quiz").update(key, store);
+
+                quizQuestionFragment.quizData.put(key, store);
+                quizQuestionFragment.setAdapterQuizQue();
+
+                requireActivity().onBackPressed();
             }
         });
 

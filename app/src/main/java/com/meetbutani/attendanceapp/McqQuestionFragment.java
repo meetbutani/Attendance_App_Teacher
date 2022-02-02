@@ -25,6 +25,7 @@ public class McqQuestionFragment extends QuestionsAddFragment {
     private Button btnSubmit;
     private String COURSEID;
     private String sheetId;
+    private QuizQuestionFragment quizQuestionFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class McqQuestionFragment extends QuestionsAddFragment {
         if (bundleQue != null) {
             modelAttendanceSheet = (ModelAttendanceSheet) bundleQue.getSerializable("modelAttendanceSheet");
             modelCourse = (ModelCourse) bundleQue.getSerializable("modelCourse");
+            quizQuestionFragment = (QuizQuestionFragment) bundleQue.getSerializable("THIS");
             COURSEID = modelCourse.courseId;
             sheetId = modelAttendanceSheet.sheetId;
         }
@@ -78,6 +80,11 @@ public class McqQuestionFragment extends QuestionsAddFragment {
 
                 firebaseFirestore.collection(COURSESPATH + "/" + COURSEID + "/sheets/" + sheetId + "/attendance")
                         .document("quiz").update(key, store);
+
+                quizQuestionFragment.quizData.put(key, store);
+                quizQuestionFragment.setAdapterQuizQue();
+
+                requireActivity().onBackPressed();
 
 /*
                 Bundle bundleQue = new Bundle();

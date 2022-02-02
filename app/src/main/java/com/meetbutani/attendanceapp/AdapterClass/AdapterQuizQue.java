@@ -42,10 +42,67 @@ public class AdapterQuizQue extends RecyclerView.Adapter<AdapterQuizQue.ViewHold
         String data = String.valueOf(quizData.get(keyArray[position]));
 
         if (data.startsWith("mcq")) {
+            holder.mcqRBtnOptA = holder.itemView.findViewById(R.id.mcqRBtnOptA);
+            holder.mcqRBtnOptB = holder.itemView.findViewById(R.id.mcqRBtnOptB);
+            holder.mcqRBtnOptC = holder.itemView.findViewById(R.id.mcqRBtnOptC);
+            holder.mcqRBtnOptD = holder.itemView.findViewById(R.id.mcqRBtnOptD);
+
+            String[] dataArray = data.split("~");
+
+            holder.hideMcq.setVisibility(View.VISIBLE);
+            holder.hideTF.setVisibility(View.GONE);
+            holder.hideMul.setVisibility(View.GONE);
+
+            holder.tvQuestion.setText(dataArray[1]);
+
+            holder.mcqRBtnOptA.setText(dataArray[2]);
+            holder.mcqRBtnOptB.setText(dataArray[3]);
+            holder.mcqRBtnOptC.setText(dataArray[4]);
+            holder.mcqRBtnOptD.setText(dataArray[5]);
+
+            if (dataArray[6].equalsIgnoreCase("A")) holder.mcqRBtnOptA.setChecked(true);
+            else if (dataArray[6].equalsIgnoreCase("B")) holder.mcqRBtnOptB.setChecked(true);
+            else if (dataArray[6].equalsIgnoreCase("C")) holder.mcqRBtnOptC.setChecked(true);
+            else if (dataArray[6].equalsIgnoreCase("D")) holder.mcqRBtnOptD.setChecked(true);
 
         } else if (data.startsWith("t/f")) {
+            holder.tfRBtnTrue = holder.itemView.findViewById(R.id.tfRBtnTrue);
+            holder.tfRBtnFalse = holder.itemView.findViewById(R.id.tfRBtnFalse);
+
+            String[] dataArray = data.split("~");
+
+            holder.hideMcq.setVisibility(View.GONE);
+            holder.hideTF.setVisibility(View.VISIBLE);
+            holder.hideMul.setVisibility(View.GONE);
+
+            holder.tvQuestion.setText(dataArray[1]);
+
+            if (dataArray[2].equalsIgnoreCase("T")) holder.tfRBtnTrue.setChecked(true);
+            else if (dataArray[2].equalsIgnoreCase("F")) holder.tfRBtnFalse.setChecked(true);
 
         } else if (data.startsWith("mul")) {
+            holder.mulCbOptA = holder.itemView.findViewById(R.id.mulCbOptA);
+            holder.mulCbOptB = holder.itemView.findViewById(R.id.mulCbOptB);
+            holder.mulCbOptC = holder.itemView.findViewById(R.id.mulCbOptC);
+            holder.mulCbOptD = holder.itemView.findViewById(R.id.mulCbOptD);
+
+            String[] dataArray = data.split("~");
+
+            holder.hideMcq.setVisibility(View.GONE);
+            holder.hideTF.setVisibility(View.GONE);
+            holder.hideMul.setVisibility(View.VISIBLE);
+
+            holder.tvQuestion.setText(dataArray[1]);
+
+            holder.mulCbOptA.setText(dataArray[2]);
+            holder.mulCbOptB.setText(dataArray[3]);
+            holder.mulCbOptC.setText(dataArray[4]);
+            holder.mulCbOptD.setText(dataArray[5]);
+
+            if (dataArray[6].contains("A")) holder.mulCbOptA.setChecked(true);
+            if (dataArray[6].contains("B")) holder.mulCbOptB.setChecked(true);
+            if (dataArray[6].contains("C")) holder.mulCbOptC.setChecked(true);
+            if (dataArray[6].contains("D")) holder.mulCbOptD.setChecked(true);
 
         }
 /*
@@ -75,18 +132,18 @@ public class AdapterQuizQue extends RecyclerView.Adapter<AdapterQuizQue.ViewHold
 //            itemView.setOnClickListener(this);
             tvQuestion = itemView.findViewById(R.id.tvQuestion);
             hideMcq = itemView.findViewById(R.id.hideMcq);
-            mcqRBtnOptA = itemView.findViewById(R.id.mcqRBtnOptA);
-            mcqRBtnOptB = itemView.findViewById(R.id.mcqRBtnOptB);
-            mcqRBtnOptC = itemView.findViewById(R.id.mcqRBtnOptC);
-            mcqRBtnOptD = itemView.findViewById(R.id.mcqRBtnOptD);
             hideTF = itemView.findViewById(R.id.hideTF);
-            tfRBtnTrue = itemView.findViewById(R.id.tfRBtnTrue);
-            tfRBtnFalse = itemView.findViewById(R.id.tfRBtnFalse);
             hideMul = itemView.findViewById(R.id.hideMul);
-            mulCbOptA = itemView.findViewById(R.id.mulCbOptA);
-            mulCbOptB = itemView.findViewById(R.id.mulCbOptB);
-            mulCbOptC = itemView.findViewById(R.id.mulCbOptC);
-            mulCbOptD = itemView.findViewById(R.id.mulCbOptD);
+//            mcqRBtnOptA = itemView.findViewById(R.id.mcqRBtnOptA);
+//            mcqRBtnOptB = itemView.findViewById(R.id.mcqRBtnOptB);
+//            mcqRBtnOptC = itemView.findViewById(R.id.mcqRBtnOptC);
+//            mcqRBtnOptD = itemView.findViewById(R.id.mcqRBtnOptD);
+//            tfRBtnTrue = itemView.findViewById(R.id.tfRBtnTrue);
+//            tfRBtnFalse = itemView.findViewById(R.id.tfRBtnFalse);
+//            mulCbOptA = itemView.findViewById(R.id.mulCbOptA);
+//            mulCbOptB = itemView.findViewById(R.id.mulCbOptB);
+//            mulCbOptC = itemView.findViewById(R.id.mulCbOptC);
+//            mulCbOptD = itemView.findViewById(R.id.mulCbOptD);
 
         }
 

@@ -16,7 +16,7 @@ import com.meetbutani.attendanceapp.ModelClass.ModelCourse;
 public class TrueFalseQuestionFragment extends QuestionsAddFragment {
 
     private View view;
-    private Bundle bundleAS;
+    private Bundle bundleQue;
     private ModelAttendanceSheet modelAttendanceSheet;
     private ModelCourse modelCourse;
     private String COURSEID;
@@ -24,6 +24,7 @@ public class TrueFalseQuestionFragment extends QuestionsAddFragment {
     private RadioButton rBtnTrue, rBtnFalse;
     private TextInputEditText etQuestion;
     private Button btnSubmit;
+    private QuizQuestionFragment quizQuestionFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,11 +38,12 @@ public class TrueFalseQuestionFragment extends QuestionsAddFragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_true_false_question, container, false);
 
-        bundleAS = this.getArguments();
+        bundleQue = this.getArguments();
 
-        if (bundleAS != null) {
-            modelAttendanceSheet = (ModelAttendanceSheet) bundleAS.getSerializable("modelAttendanceSheet");
-            modelCourse = (ModelCourse) bundleAS.getSerializable("modelCourse");
+        if (bundleQue != null) {
+            modelAttendanceSheet = (ModelAttendanceSheet) bundleQue.getSerializable("modelAttendanceSheet");
+            modelCourse = (ModelCourse) bundleQue.getSerializable("modelCourse");
+            quizQuestionFragment = (QuizQuestionFragment) bundleQue.getSerializable("THIS");
             COURSEID = modelCourse.courseId;
             sheetId = modelAttendanceSheet.sheetId;
         }
@@ -57,8 +59,8 @@ public class TrueFalseQuestionFragment extends QuestionsAddFragment {
                 String question = String.valueOf(etQuestion.getText()).trim();
 
                 String ans = "";
-                if (rBtnTrue.isChecked()) ans = "true";
-                else if (rBtnFalse.isChecked()) ans = "false";
+                if (rBtnTrue.isChecked()) ans = "T";
+                else if (rBtnFalse.isChecked()) ans = "F";
 
                 String store = "t/f" + "~" + question + "~" + ans;
                 String key = Timestamp.now().getSeconds() + "";
@@ -66,6 +68,10 @@ public class TrueFalseQuestionFragment extends QuestionsAddFragment {
                 firebaseFirestore.collection(COURSESPATH + "/" + COURSEID + "/sheets/" + sheetId + "/attendance")
                         .document("quiz").update(key, store);
 
+                quizQuestionFragment.quizData.put(key, store);
+                quizQuestionFragment.setAdapterQuizQue();
+
+                requireActivity().onBackPressed();
             }
         });
 

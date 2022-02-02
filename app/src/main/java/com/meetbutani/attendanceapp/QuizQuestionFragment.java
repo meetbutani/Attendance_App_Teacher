@@ -22,11 +22,14 @@ import com.meetbutani.attendanceapp.ModelClass.ModelCourse;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
-public class QuizQuestionFragment extends QuizAttendanceFragment {
+public class QuizQuestionFragment extends QuizAttendanceFragment implements Serializable {
 
     private View view;
     private Bundle bundleAS;
@@ -39,21 +42,9 @@ public class QuizQuestionFragment extends QuizAttendanceFragment {
     private Context CONTEXT;
     private String COURSEID;
     private String sheetId;
-    private Map<String, Object> quizData;
+    public Map<String, Object> quizData;
     private String[] keyArray;
     private AdapterQuizQue adapterQuizQue;
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        setBundleQue();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        setBundleQue();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +53,7 @@ public class QuizQuestionFragment extends QuizAttendanceFragment {
         view = inflater.inflate(R.layout.fragment_quiz_question, container, false);
 
         CONTEXT = getContext();
+        quizQuestionFragment = this;
 
         bundleAS = this.getArguments();
 
@@ -81,7 +73,7 @@ public class QuizQuestionFragment extends QuizAttendanceFragment {
             @Override
             public void onClick(View v) {
                 bundleQue = new Bundle();
-//                bundleQue.putSerializable("THIS", (Serializable) quizQuestionFragment);
+                bundleQue.putSerializable("THIS", quizQuestionFragment);
                 bundleQue.putSerializable("modelAttendanceSheet", modelAttendanceSheet);
                 bundleQue.putSerializable("modelCourse", modelCourse);
 
@@ -110,14 +102,16 @@ public class QuizQuestionFragment extends QuizAttendanceFragment {
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
+
                             quizData = documentSnapshot.getData();
 
                             if (quizData != null) {
                                 quizData.remove("default");
+                                quizData = new TreeMap<>(quizData);
 
-                                adapterQuizQue = new AdapterQuizQue(getActivity(), quizData);
+                                setAdapterQuizQue();
 
-                                keyArray = quizData.keySet().toArray(new String[0]);
+//                                keyArray = quizData.keySet().toArray(new String[0]);
                             }
                         }
                     });
@@ -126,10 +120,11 @@ public class QuizQuestionFragment extends QuizAttendanceFragment {
             dialog.setMessage("Error: " + e.getMessage()).create().show();
 //            Toast.makeText(CONTEXT, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
     }
 
-    private void setBundleQue() {
-
+    protected void setAdapterQuizQue() {
+        adapterQuizQue = new AdapterQuizQue(getActivity(), quizData);
+        rvFragQuizQue.setAdapter(adapterQuizQue);
     }
+
 }

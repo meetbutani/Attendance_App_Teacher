@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="3dp"
     app:cardBackgroundColor="@color/gray"
     app:cardCornerRadius="8dp"
     app:cardElevation="5dp">
@@ -11,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:background="@drawable/outline_box"
         android:orientation="vertical"
         android:paddingHorizontal="10dp"
@@ -27,7 +28,12 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="3dp"
             android:hint="Question"
-            android:textAlignment="center" />
+            android:paddingHorizontal="5dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#30000000" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,31 +45,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="3dp"
-                android:checkedButton="@id/rBtnOptA"
                 android:visibility="visible">
 
                 <RadioButton
                     android:id="@+id/mcqRBtnOptA"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
                     android:hint="Option A" />
 
                 <RadioButton
                     android:id="@+id/mcqRBtnOptB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
                     android:hint="Option B" />
 
                 <RadioButton
                     android:id="@+id/mcqRBtnOptC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
                     android:hint="Option C" />
 
                 <RadioButton
                     android:id="@+id/mcqRBtnOptD"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
                     android:hint="Option D" />
 
             </RadioGroup>
@@ -73,19 +82,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="3dp"
-                android:checkedButton="@id/rBtnOptA"
                 android:visibility="visible">
 
                 <RadioButton
                     android:id="@+id/tfRBtnTrue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
                     android:text="True" />
 
                 <RadioButton
                     android:id="@+id/tfRBtnFalse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
                     android:text="False" />
 
             </RadioGroup>
@@ -102,24 +112,28 @@
                     android:id="@+id/mulCbOptA"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
                     android:hint="Option A" />
 
                 <CheckBox
                     android:id="@+id/mulCbOptB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
                     android:hint="Option B" />
 
                 <CheckBox
                     android:id="@+id/mulCbOptC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
                     android:hint="Option C" />
 
                 <CheckBox
                     android:id="@+id/mulCbOptD"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
                     android:hint="Option D" />
 
             </LinearLayout>

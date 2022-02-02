@@ -4,11 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
+import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +37,9 @@ public class MainActivity extends BaseActivity {
     private DrawerLayout drawerLayout;
     private MaterialToolbar tbMainActivity;
     private NavigationView navViewMain;
+    private View navHeader;
+    private TextView tvProfileName, tvProfileEmail;
+    private CircularImageView ivProfileUserPic;
 
     private long backPressedTime;
     private Toast toast;
@@ -49,9 +56,21 @@ public class MainActivity extends BaseActivity {
         tbMainActivity = findViewById(R.id.tbMainActivity);
         navViewMain = findViewById(R.id.navViewMain);
 
+        navHeader = navViewMain.getHeaderView(0);
+        ivProfileUserPic = navHeader.findViewById(R.id.ivProfileUserPic);
+        tvProfileName = navHeader.findViewById(R.id.tvProfileName);
+        tvProfileEmail = navHeader.findViewById(R.id.tvProfileEmail);
+
         CONTEXT = MainActivity.this;
 
         setFragment(new CourseFragment(), "CourseFragment");
+
+        String imageURL = getImageURL();
+        if (!imageURL.equalsIgnoreCase(" "))
+            Picasso.get().load(Uri.parse(imageURL)).into(ivProfileUserPic);
+
+        tvProfileName.setText(getName());
+        tvProfileEmail.setText(getEmailId().replace("@", "\n@"));
 
         tbMainActivity.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
